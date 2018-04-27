@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+
+        <h1>Simplyfi App</h1>
+
+        
+        <h3>Calculate the chances of Success of disrupting the financial industry </h3>
+        <p>Simplyfi <- Abhishek</p>
+       
+       <div id='app'></div>
+       <div id='result'></div>
+
+        <button id="button">Get result from Blockchain</button>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <script>
+
+        
+  if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("https://api.myetherapi.com/eth"));
+        }
+
+	var Contract = web3.eth.contract([
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "Viswanadh_simplyfi",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "Abhishek",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "res",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getResult",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	}
+]);
+
+	 var tro = Contract.at('0xCd4d315309DB3f95841473a717208747d204d941');
+        console.log(tro);
+
+        tro.getResult((err, res)=>{
+            if(err)console.log(err);
+            else console.log(res);
+        })
+
+        // var con = Coursetro.deployed();
+        // con.then(a => console.log(a.Abhishek().then(console.log)))
+
+        // Coursetro.getInstructor(function(error, result){
+        //     if(!error)
+        //         {
+        //             $("#instructor").html(result[0]+' ('+result[1]+' years old)');
+        //             console.log(result);
+        //         }
+        //     else
+        //         console.error(error);
+        // });
+
+        $("#button").click(function() {
+           
+            tro.getResult((err, res)=>{
+            if(err)console.log(err);
+            else console.log(res);
+                $('#app').html(res[0] +  "+" + res[1] + " = " + String(Number(res[0]) + Number(res[1])) +"%" ) ;
+                $('#result').html("Result - " + res[2] ) ;
+
+
+        })
+        });
+
+
+
+    </script>
+
+</body>
+</html>
